@@ -8,27 +8,27 @@ to compile CoffeeScript 1.0 as part of your maven build.
 Coffeescript-maven is not yet in maven central, so for now you have to install
 it manually:
 
-  git clone git://github.com/jakewins/coffeescript-maven.git
-  cd coffeescript-maven
-  mvn clean install
+    git clone git://github.com/jakewins/coffeescript-maven.git
+    cd coffeescript-maven
+    mvn clean install
 
 Than, add the plugin to your pom:
 
-  <plugins> 
-    ..
-    <plugin>
-      <groupId>com.voltvoodoo</groupId>
-      <artifactId>coffeescript-maven</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <executions>
-        <execution>
-          <goals>
-            <goal>compile</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
-  </plugins>
+    <plugins> 
+      ..
+      <plugin>
+        <groupId>com.voltvoodoo</groupId>
+        <artifactId>coffeescript-maven</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
 
 ### Goals
 
@@ -45,22 +45,22 @@ into ${project.build.outputDirectory}.
 
 You can change these two settings by configuration:
   
-  <plugins> 
-    ..
-    <plugin>
-      <groupId>com.voltvoodoo</groupId>
-      <artifactId>coffeescript-maven</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <executions>
-        <execution>
-          <goals>
-            <goal>compile</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-        <sourceDir>${basedir}/my/awesome/directory</sourceDir>
-        <outputDir>${basedir}/src/main/webapp/js</outputDir>
-      </configuration>
-    </plugin>
-  </plugins>
+    <plugins> 
+      ..
+      <plugin>
+        <groupId>com.voltvoodoo</groupId>
+        <artifactId>coffeescript-maven</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <sourceDir>${basedir}/my/awesome/directory</sourceDir>
+          <outputDir>${basedir}/src/main/webapp/js</outputDir>
+        </configuration>
+      </plugin>
+    </plugins>
