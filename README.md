@@ -5,7 +5,14 @@ to compile CoffeeScript 1.0 as part of your maven build.
 
 ### Usage
 
-Add the plugin to your pom:
+Coffeescript-maven is not yet in maven central, so for now you have to install
+it manually:
+
+  git clone git://github.com/jakewins/coffeescript-maven.git
+  cd coffeescript-maven
+  mvn clean install
+
+Than, add the plugin to your pom:
 
   <plugins> 
     ..
