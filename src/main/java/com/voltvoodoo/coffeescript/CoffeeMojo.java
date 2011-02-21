@@ -24,8 +24,8 @@ import org.jcoffeescript.Option;
  * and have never built a compiler plugin. Anyone interested is welcome to
  * convert this to a compiler plugin.
  * 
- * @goal build
- * @phase process-resources
+ * @goal compile
+ * @phase compile
  * 
  */
 public class CoffeeMojo extends AbstractMojo {
