@@ -25,12 +25,13 @@
 		<maven.version>2.2.1</maven.version>
 		<maven.compiler.source>1.5</maven.compiler.source>
 		<maven.compiler.target>1.5</maven.compiler.target>
-		
-		<git.repo>git@github.com:jakewins/requirejs-maven.git</git.repo>
-		<git.url>github.com/jakewins/requirejs-maven</git.url>
+		<short-name>coffeescript-maven</short-name>
+
+		<git.repo>git@github.com:jakewins/coffeescript-maven.git</git.repo>
+		<git.url>github.com/jakewins/coffeescript-maven</git.url>
 		<git.url.http>http://${git.url}</git.url.http>
 		<git.url.git>git://${git.url}</git.url.git>
-		
+
 	</properties>
 
 	<scm>
@@ -68,14 +69,14 @@
 	</developers>
 
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
 			<version>2.0.9</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-project</artifactId>
@@ -108,7 +109,7 @@
 	</dependencies>
 
 	<build>
-	
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -211,7 +212,8 @@
 					</reportPlugins>
 				</configuration>
 			</plugin>
-		</plugins> 
+
+		</plugins>
 	</build>
 
 	<profiles>

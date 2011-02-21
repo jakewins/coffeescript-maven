@@ -1,0 +1,13 @@
+Coffeescript-maven
+Copyright (c) 2002-2011 Jacob Hansson <jacob@voltvoodoo.com>
+
+Requirejs-maven is released under the LGPL. See LICENSE.txt.
+
+Third party libraries
+---------------------
+
+See LICENSES.txt for full licenses.
+
+Jcoffeescript is copyright 2010 David Yeung. It is licensed under an apache license.
+
+Coffeescript is copyright (c) 2011 Jeremy Ashkenas, licensed under a custom license.
