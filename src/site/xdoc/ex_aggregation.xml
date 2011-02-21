@@ -1,0 +1,140 @@
+<document>
+<properties>
+  <author email="dwayneb@users.sourceforge.net">David Bernard</author>
+  </properties>
+ <body>
+ <section name="Aggregation">
+<p>Good practice :
+<ul>
+<li>on web, is to download/call one big js file instead of several small files.</li>
+<li>in source code organisation is to have unit file (with one "concern").</li>
+</ul>
+</p>
+<p>The major js and css framework/lib provide source code in both version (one big, lot of small), or provide a online tool to generate the big.</p>
+<p>The following option allow you to use/store small files into your source and generate the big at build time. The aggregation is done after yuicompression</p> 
+
+<subsection name="Basic sample">
+<p>To Compress every js and css files and aggregate every js file under ${project.build.directory}/${project.build.finalName}/static/ into all.js :
+<source><![CDATA[
+<project>
+...
+  <build>
+    <plugins>
+...
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>yuicompressor-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compress</goal>
+            </goals>
+          </execution>
+        </executions>        
+        <configuration>
+          <nosuffix>true</nosuffix>
+          <aggregations>
+            <aggregation>
+              <!-- remove files after aggregation (default: false)
+              <removeIncluded>true</removeIncluded>
+              -->
+              <!-- insert new line after each concatenation (default: false) -->
+              <insertNewLine>true</insertNewLine>
+              <output>${project.build.directory}/${project.build.finalName}/static/all.js</output>
+              <!-- files to include, path relative to output's directory or absolute path-->
+              <!--inputDir>base directory for non absolute includes, default to parent dir of output</inputDir-->
+              <includes>
+                <include>${basedir}/src/licenses/license.js</include>
+                <include>**/*.js</include>
+              </includes>
+              <!-- files to exclude, path relative to output's directory
+              <excludes>
+                <exclude>**/*.pack.js</exclude>
+                <exclude>**/compressed.css</exclude>
+              </excludes>
+              -->
+            </aggregation>
+          </aggregations>
+        </configuration>
+      </plugin>
+...
+    </plugins>
+  </build>
+...
+</project>
+ ]]></source>
+</p>
+</subsection>
+
+<subsection name="Removing included files">
+<p>Using removeIncluded option, remove file, but the war plugin will then add file.
+So if you want to remove file after aggregation and don't want war plugin copy them, then you need to use warSourceExcludes :
+<source><![CDATA[
+<project>
+...
+  <build>
+    <plugins>
+...
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>yuicompressor-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compress</goal>
+            </goals>
+          </execution>
+        </executions>        
+        <configuration>
+          <nosuffix>true</nosuffix>
+          <aggregations>
+           <aggregation>
+              <!-- remove files after aggregation (default: false) -->
+              <removeIncluded>true</removeIncluded>
+              <!-- insert new line after each concatenation (default: false) -->
+              <insertNewLine>true</insertNewLine>
+              <output>${project.build.directory}/${project.build.finalName}/static/all-2.js</output>
+              <!-- files to include, path relative to output's directory -->
+              <includes>
+                <include>toAggregateAndRemove/**.js</include>
+              </includes>
+            </aggregation>
+          </aggregations>
+        </configuration>
+      </plugin>
+...
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <warSourceExcludes>**/toAggregateAndRemove/**</warSourceExcludes>
+        </configuration>
+      </plugin>
+...
+    </plugins>
+  </build>
+...
+</project>
+ ]]></source>
+</p>
+</subsection>
+<subsection name="Adding header (copyright)">
+<p>When aggregating minified js files, the copyright headers have been stripped out which is fine because we don't want to repeat it several times in the output file.
+However it would be great to be able to insert one at beginning of output file.
+</p>
+<p>For simple cases, the maven-license-plugin is enough if you use the same header for all files but it is not enough if you want to have a different header per aggregation (different libraries with different licensing schemes).</p>
+<ol>
+<li>you put license header in its own file (ex license_js.txt)</li>
+<li>aggregate a license header to minified files.</li>
+</ol>
+<source><![CDATA[
+  <includes>
+    <include>${project.build.sourceDirectory}/../webapp/js/mylib/copyright.txt</include>
+    <include>mylib/**/*.js</include>
+  </includes>
+ ]]></source>
+
+</subsection>
+</section>
+</body>
+</document>
